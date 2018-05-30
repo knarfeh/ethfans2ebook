@@ -1,0 +1,18 @@
+version: '2'
+services:
+  ethfanseebook:
+    image: knarfeh/ethfanseebook
+    build:
+      context: .
+      dockerfile: ./.docker/dev/Dockerfile
+    # entrypoint: [sh]
+    command: ["go", "run", "main.go", "fetch"]
+    tty: true
+    volumes:
+      - .:/go/src/github.com/knarfeh/ethfanseebook/
+    environment:
+      - URL=https://ethfans.org/
+      - DAY_TIME_STAMP=2018-05-30
+      # - ES_HOST_PORT=http://elasticsearch:9200
+      - ES_HOST_PORT=http://192.168.199.121:9200
+      - no_proxy=true
