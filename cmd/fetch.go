@@ -53,11 +53,11 @@ func getUrlSlice(doc *goquery.Document, hrefs *[]string) {
 }
 
 func main() {
-	fmt.Println("ethfanseebook running...")
+	fmt.Println("ethfans2ebook running...")
 	URL := viper.GetString("URL")
 	DAYTIMESTAMP := viper.GetString("DAY_TIME_STAMP")
 	ESHOSTPORT := viper.GetString("ES_HOST_PORT")
-	viper.SetDefault("ROUTINE_NUM", 10)
+	viper.SetDefault("ROUTINE_NUM", 2)
 
 	esClient, err := elastic.NewClient(elastic.SetURL(ESHOSTPORT))
 	if err != nil {
@@ -127,9 +127,8 @@ func main() {
 	}
 	bulkMetaData := elastic.NewBulkIndexRequest().Index("eebook").Type("metadata").Id(URL).Doc(m)
 	bulkFinalRequest := bulkRequest.Add(bulkMetaData)
-	bulkResponse, err := bulkFinalRequest.Do(context.TODO())
+	_, err = bulkFinalRequest.Do(context.TODO())
 	if err != nil {
-		fmt.Println("err???", err)
+		fmt.Println("err: ", err)
 	}
-	fmt.Println("bulkResponse: ", bulkResponse)
 }

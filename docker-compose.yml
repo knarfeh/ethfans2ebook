@@ -1,7 +1,7 @@
 version: '2'
 services:
-  ethfanseebook:
-    image: knarfeh/ethfanseebook
+  ethfans2ebook:
+    image: knarfeh/ethfans2ebook
     build:
       context: .
       dockerfile: ./.docker/dev/Dockerfile
@@ -9,7 +9,7 @@ services:
     command: ["go", "run", "main.go", "fetch"]
     tty: true
     volumes:
-      - .:/go/src/github.com/knarfeh/ethfanseebook/
+      - .:/go/src/github.com/knarfeh/ethfans2ebook/
     environment:
       - URL=https://ethfans.org/
       - DAY_TIME_STAMP=2018-05-30
